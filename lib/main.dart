@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'pages/home.dart';
 
-void main() => runApp(const MyDemoApp()); 
+void main() => runApp(const MyDemoApp());
 
 class MyDemoApp extends StatelessWidget {
   const MyDemoApp({super.key});
@@ -12,19 +12,19 @@ class MyDemoApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.black54,         
+        primaryColor: Colors.black54,
       ),
-      home:  Scaffold(
+      home: Scaffold(
         appBar: AppBar(
-          title: const Text("Flutter Demo"), 
+          title: const Text("Flutter Demo"),
         ),
         body: const HomeScreen(),
         drawer: const Drawer(),
         floatingActionButton: FloatingActionButton(
-          onPressed: (){},
+          onPressed: () {},
           child: const Icon(Icons.add),
         ),
       ),
-    ); 
+    );
   }
 }
