@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'package:flutter_app1/home.dart';
 
-void main() => runApp(const MyDemoApp()); 
+void main() => runApp(const MyDemoApp());
 
 class MyDemoApp extends StatelessWidget {
   const MyDemoApp({super.key});
@@ -9,22 +9,25 @@ class MyDemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.black54,         
-      ),
-      home:  Scaffold(
-        appBar: AppBar(
-          title: const Text("Flutter Demo"), 
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.white70,
+          backgroundColor: Colors.black54,
+          elevation: 4.0,
+          titleSpacing: 1.0,
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.w700,
+          ),
         ),
-        body: const HomeScreen(),
-        drawer: const Drawer(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){},
-          child: const Icon(Icons.add),
-        ),
       ),
-    ); 
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const HomeScreen(),
+        "/home": (context) => const HomeScreen(),
+      },
+    );
   }
 }
