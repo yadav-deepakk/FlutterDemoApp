@@ -3,10 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app1/routes/available_routes.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
+
+  String _greetText = "Welcome";
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class LoginScreen extends StatelessWidget {
             ),
 
             // greet user
-            Text("Welcome", style: Theme.of(context).textTheme.headlineLarge),
+            Text(_greetText, style: Theme.of(context).textTheme.headlineLarge),
 
             // Form will go here in Center Widget.
             Padding(
@@ -55,6 +63,11 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    onChanged: (val) {
+                      setState(() {
+                        _greetText = "Welcome $val";
+                      });
+                    },
                   ),
 
                   // password
@@ -85,7 +98,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 28.0),
 
                   // Login Button
                   SizedBox(
