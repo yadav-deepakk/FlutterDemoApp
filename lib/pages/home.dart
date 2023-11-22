@@ -10,11 +10,17 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    // taking navigator params
+    final Map<String, dynamic> args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Flutter Demo"),
       ),
-      body: const Center(),
+      body: Center(
+        child: Text("welcome ${args['user']} at : ${args['loginTime']}"),
+      ),
     );
   }
 }

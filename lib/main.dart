@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/pages/home.dart';
 import 'package:flutter_app1/pages/login.dart';
+import 'package:flutter_app1/routes/available_routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const MyApp());
@@ -14,22 +15,27 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo App',
       theme: ThemeData(
         primaryColor: Colors.lightBlue,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).primaryColor,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.lightBlue,
+          foregroundColor: Colors.white,
           centerTitle: true,
           titleSpacing: 2.0,
           elevation: 4.0,
           shadowColor: Colors.blueGrey,
         ),
+
+        // Plain Readable Fonts - openSans, roboto, lato, notoSans, poppins, quicksand, sourceSansPro
+        // Cursive Fonts - dancingScript, greatVibes, pacifico, italianno, parisienne, cookie
         textTheme: TextTheme(
-          titleLarge: GoogleFonts.roboto(
-            fontSize: 28,
+          titleLarge: GoogleFonts.dancingScript(
+            fontSize: 36.0,
             fontWeight: FontWeight.w600,
-            fontStyle: FontStyle.italic,
+            fontStyle: FontStyle.normal,
+            letterSpacing: 1.0,
           ),
-          headlineLarge: GoogleFonts.roboto(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
+          headlineLarge: GoogleFonts.parisienne(
+            fontSize: 30.0,
+            fontWeight: FontWeight.normal,
           ),
           bodyLarge: GoogleFonts.roboto(
             fontSize: 20.0,
@@ -39,11 +45,10 @@ class MyApp extends StatelessWidget {
           bodySmall: GoogleFonts.lato(fontSize: 16.0),
         ),
       ),
-      initialRoute: "/login",
+      initialRoute: AvailableRoutes.root,
       routes: {
-        "/": (context) => const HomeScreen(),
-        "/home": (context) => const HomeScreen(),
-        "/login": (context) => LoginScreen(),
+        AvailableRoutes.home: (context) => const HomeScreen(),
+        AvailableRoutes.login: (context) => LoginScreen(),
       },
     );
   }
