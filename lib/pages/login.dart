@@ -15,6 +15,37 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passController = TextEditingController();
 
   String _greetText = "Welcome";
+  bool _isLoginSuccess = false;
+
+  void _handleLogin(context) async {
+    developer.log("Login Button Clicked!");
+    developer.log("USER: ${_userNameController.text}");
+    developer.log("PASS: ${_passController.text}");
+
+    if (_userNameController.text != "Deepak" &&
+        _passController.text != "Admin#123") {
+      _showFlutterToast("Enter Valid Credentials.");
+      return;
+    }
+
+    setState(() => _isLoginSuccess = !_isLoginSuccess);
+    _showFlutterToast("Login Successful!");
+    await Future.delayed(const Duration(milliseconds: 500), () {
+      Navigator.pop(context);
+      DateTime d = DateTime.now();
+      String currentDateTime =
+          "${d.day}/${d.month}/${d.year} ${d.hour}:${d.minute}:${d.second}";
+      Navigator.pushNamed(
+        context,
+        AvailableRoutes.home,
+        arguments: {
+          "user": _userNameController.text,
+          "pass": _passController.text,
+          "loginTime": currentDateTime,
+        },
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    onChanged: (val) {
-                      setState(() {
-                        _greetText = "Welcome $val";
-                      });
-                    },
+                    onChanged: (v) => setState(() => _greetText = "Welcome $v"),
                   ),
 
                   // password
@@ -101,42 +128,48 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 28.0),
 
                   // Login Button
-                  SizedBox(
-                    width: 240.0,
-                    height: 48.0,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        developer.log("Login Button Clicked!");
 
-                        developer.log("USER: ${_userNameController.text}");
-                        developer.log("PASS: ${_passController.text}");
-                        if (!(_userNameController.text == "Deepak") &&
-                            !(_passController.text == "Admin#123")) {
-                          _showFlutterToast("Enter Valid Credentials.");
-                          return;
-                        }
+                  // SizedBox(
+                  //   width: 240.0,
+                  //   height: 48.0,
+                  //   child: ElevatedButton(
+                  //     onPressed: () => _handleLoginTap(context),
+                  //     style: TextButton.styleFrom(
+                  //       backgroundColor: Theme.of(context).primaryColor,
+                  //       foregroundColor: Colors.white,
+                  //       elevation: 2.0,
+                  //     ),
+                  //     child: const Text("LOGIN"),
+                  //   ),
+                  // ),
 
-                        _showFlutterToast("Login Successful!");
-                        Navigator.pop(context);
-                        DateTime d = DateTime.now();
-                        String currentDateTime =
-                            "${d.day}/${d.month}/${d.year} ${d.hour}:${d.minute}:${d.second}";
-                        Navigator.pushNamed(
-                          context,
-                          AvailableRoutes.home,
-                          arguments: {
-                            "user": _userNameController.text,
-                            "pass": _passController.text,
-                            "loginTime": currentDateTime,
-                          },
-                        );
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        foregroundColor: Colors.white,
-                        elevation: 2.0,
+                  InkWell(
+                    onTap: () => _handleLogin(context),
+                    splashColor: Colors.white,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 450),
+                      curve: Curves.easeInOut,
+                      width: _isLoginSuccess ? 50 : 240.0,
+                      height: 50.0,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: _isLoginSuccess
+                            ? Colors.green
+                            : Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(
+                            _isLoginSuccess ? 25.0 : 14.0),
                       ),
-                      child: const Text("LOGIN"),
+                      child: _isLoginSuccess
+                          ? const Icon(Icons.done, color: Colors.white)
+                          : const Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.0,
+                              ),
+                            ),
                     ),
                   ),
                   // Login Button Ends.
