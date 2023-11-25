@@ -15,13 +15,20 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo App',
       theme: ThemeData(
         primaryColor: Colors.lightBlue,
+
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Color.fromARGB(255, 112, 194, 232),
           foregroundColor: Colors.white,
           centerTitle: true,
           titleSpacing: 2.0,
-          elevation: 4.0,
+          elevation: 2.0,
           shadowColor: Colors.blueGrey,
+        ),
+
+        drawerTheme: const DrawerThemeData(
+          backgroundColor: Color.fromARGB(255, 112, 194, 232),
+          shape: BeveledRectangleBorder(),
+          elevation: 4.0,
         ),
 
         // Plain Readable Fonts - openSans, roboto, lato, notoSans, poppins, quicksand, sourceSansPro
