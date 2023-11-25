@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Flutter Demo"),
+        title: const Text("Catalouge App"),
       ),
       body: Center(
         child: Text("welcome ${args['user']} at : ${args['loginTime']}"),
