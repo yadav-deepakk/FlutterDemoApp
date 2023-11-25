@@ -13,7 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
-  final FocusNode _uNameTextFieldFocusNode = FocusNode();
+  final FocusNode _userNamFieldFocusNode = FocusNode();
   final _loginFormKey = GlobalKey<FormState>();
 
   String _greetText = "Welcome";
@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _userNameController.text = "";
           _passController.text = "";
           _isLoginSuccess = false;
-          FocusScope.of(context).requestFocus(_uNameTextFieldFocusNode);
+          FocusScope.of(context).requestFocus(_userNamFieldFocusNode);
         });
       });
     }
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       cursorColor: Theme.of(context).primaryColor,
                       controller: _userNameController,
                       validator: (uname) => _usernameValidation(uname),
-                      focusNode: _uNameTextFieldFocusNode,
+                      focusNode: _userNamFieldFocusNode,
                       decoration: InputDecoration(
                         label: Text(
                           "Username",
